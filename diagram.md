@@ -1,3 +1,5 @@
+
+''' mermaid
 graph TD;
     Farmer-->MilkCollection;
     Buyer-->MilkCollection;
