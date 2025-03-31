@@ -5,3 +5,14 @@ List<Object[]> mockData = Arrays.asList(
             new Object[]{2L, "David"},
             new Object[]{3L, "Eve"}
         );
+
+
+try (MockedStatic<CsvWriter> mockedStatic = mockStatic(CsvWriter.class)) {
+    mockedStatic.when(() -> CsvWriter.writeToCsv(anyString(), anyList())).thenAnswer(invocation -> null);
+    
+    // Call your method
+    myService.processAndWriteCsv("test.csv", Arrays.asList("Alice", "Bob"));
+    
+    // Verify method call
+    mockedStatic.verify(() -> CsvWriter.writeToCsv("test.csv", Arrays.asList("Alice", "Bob")), times(1));
+}
